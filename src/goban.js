@@ -1,7 +1,8 @@
 class GobanBoard extends HTMLElement {
   constructor() {
     super();
-    this.size = Number(this.getAttribute('size')) || 19;
+    this.wasDrawn = false;
+    this.size = 19;
     this.config = {
       board_border_width: 1,
       board_color: '#e3b85e',
@@ -19,6 +20,24 @@ class GobanBoard extends HTMLElement {
   }
 
   connectedCallback() {
+    if (!this.wasDrawn) {
+      this.drawBoard();
+    }
+  }
+
+  static get observedAttributes() {
+    return ['size'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    const oldSize = this.size;
+    this.size = Number(newValue) || 19;
+    if (this.size !== oldSize) {
+      this.drawBoard();
+    }
+  }
+
+  drawBoard() {
     const board_start = 1 - this.config.board_border_width;
     const board_width = 2 * this.config.board_border_width + this.size - 1;
     const line_start = 1 - (this.config.board_line_width / 2);
@@ -68,6 +87,7 @@ class GobanBoard extends HTMLElement {
     `;
 
     this.innerHTML = board;
+    this.wasDrawn = true;
   }
 }
 
