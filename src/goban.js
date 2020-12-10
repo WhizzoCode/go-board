@@ -4,7 +4,7 @@ class GobanBoard extends HTMLElement {
   }
 
   connectedCallback() {
-    const size = 19;
+    const size = Number(this.getAttribute('size')) || 19;
     const config = {
       board_border_width: 1,
       board_color: '#e3b85e',
