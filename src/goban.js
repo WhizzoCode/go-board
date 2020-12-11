@@ -1,22 +1,24 @@
 class GobanBoard extends HTMLElement {
+
+  wasDrawn = false;
+  size = 19;
+  config = {
+    board_border_width: 0.75,
+    board_color: '#e3b85e',
+    // board_color: '#fff',
+    board_grid_width: 0.05,
+    board_star_radius: 0.1,
+    board_marks_color: '#000',
+    stone_radius: 0.5,
+    stone_border_width: 0.05,
+    stone_black_border_color: '#000',
+    stone_black_color: '#000',
+    stone_white_border_color: '#000',
+    stone_white_color: '#fff'
+  };
+
   constructor() {
     super();
-    this.wasDrawn = false;
-    this.size = 19;
-    this.config = {
-      board_border_width: 0.75,
-      board_color: '#e3b85e',
-      // board_color: '#fff',
-      board_grid_width: 0.05,
-      board_star_radius: 0.1,
-      board_marks_color: '#000',
-      stone_radius: 0.5,
-      stone_border_width: 0.05,
-      stone_black_border_color: '#000',
-      stone_black_color: '#000',
-      stone_white_border_color: '#000',
-      stone_white_color: '#fff'
-    };
   }
 
   connectedCallback() {
@@ -89,6 +91,7 @@ class GobanBoard extends HTMLElement {
     this.innerHTML = board;
     this.wasDrawn = true;
   }
+  
 }
 
 customElements.define('goban-board', GobanBoard);
