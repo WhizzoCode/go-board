@@ -4,7 +4,7 @@ class GobanBoard extends HTMLElement {
     this.wasDrawn = false;
     this.size = 19;
     this.config = {
-      board_border_width: 1,
+      board_border_width: 0.75,
       board_color: '#e3b85e',
       // board_color: '#fff',
       board_line_width: 0.05,
