@@ -7,7 +7,7 @@ class GobanBoard extends HTMLElement {
       board_border_width: 0.75,
       board_color: '#e3b85e',
       // board_color: '#fff',
-      board_line_width: 0.05,
+      board_grid_width: 0.05,
       board_star_radius: 0.1,
       board_marks_color: '#000',
       stone_radius: 0.5,
@@ -40,8 +40,8 @@ class GobanBoard extends HTMLElement {
   drawBoard() {
     const board_start = 1 - this.config.board_border_width;
     const board_width = 2 * this.config.board_border_width + this.size - 1;
-    const line_start = 1 - (this.config.board_line_width / 2);
-    const line_end = this.size + (this.config.board_line_width / 2);
+    const grid_start = 1 - (this.config.board_grid_width / 2);
+    const grid_end = this.size + (this.config.board_grid_width / 2);
     this.config.stone_radius -= this.config.stone_border_width / 2;
 
     let board = `
@@ -50,12 +50,12 @@ class GobanBoard extends HTMLElement {
       </style>
       <svg xmlns="http://www.w3.org/2000/svg" viewbox="${board_start} ${board_start} ${board_width} ${board_width}">
         <rect x="${board_start}" y="${board_start}" width="${board_width}" height="${board_width}" fill="${this.config.board_color}"></rect>
-        <path stroke-width="${this.config.board_line_width}" stroke="${this.config.board_marks_color}" d="
+        <path stroke-width="${this.config.board_grid_width}" stroke="${this.config.board_marks_color}" d="
     `;
     for (let i = 1; i <= this.size; i++) {
       board += `
-        M ${line_start} ${i} H ${line_end}
-        M ${i} ${line_start} V ${line_end}
+        M ${grid_start} ${i} H ${grid_end}
+        M ${i} ${grid_start} V ${grid_end}
       `;
     }
     board += `
