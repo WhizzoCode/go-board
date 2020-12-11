@@ -1,6 +1,6 @@
 class GobanBoard extends HTMLElement {
 
-  wasDrawn = false;
+  isConnected = false;
   size = 19;
   config = {
     board_border_width: 0.75,
@@ -22,9 +22,12 @@ class GobanBoard extends HTMLElement {
   }
 
   connectedCallback() {
-    if (!this.wasDrawn) {
-      this.drawBoard();
-    }
+    this.isConnected = true;
+    this.drawBoard();
+  }
+
+  disconnectedCallback() {
+    this.isConnected = false;
   }
 
   static get observedAttributes() {
@@ -32,10 +35,14 @@ class GobanBoard extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    const oldSize = this.size;
-    this.size = Number(newValue) || 19;
-    if (this.size !== oldSize) {
-      this.drawBoard();
+    switch (name) {
+      case 'size':
+        const oldSize = this.size;
+        this.size = Number(newValue) || 19;
+        if ((this.size !== oldSize) && this.isConnected) {
+          this.drawBoard();
+        }
+        break;
     }
   }
 
@@ -89,7 +96,6 @@ class GobanBoard extends HTMLElement {
     `;
 
     this.innerHTML = board;
-    this.wasDrawn = true;
   }
   
 }
