@@ -2,6 +2,7 @@ class GobanBoard extends HTMLElement {
 
   isConnected = false;
   size = 19;
+  positions = [];
   config = {
     board_border_width: 0.75,
     board_color: '#e3b85e',
@@ -31,13 +32,21 @@ class GobanBoard extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['size'];
+    return ['size', 'positions'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case 'size':
         this.size = Number(newValue) || 19;
+        break;
+      case 'positions':
+        this.positions = [];
+        const positionsRaw = newValue.trim().split(/\s+/);
+        positionsRaw.forEach((positionRaw) => {
+          const position = this.parsePosition(positionRaw);
+          if (position) this.positions.push(position);
+        });
         break;
     }
     if (this.isConnected) this.drawBoard();
