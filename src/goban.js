@@ -97,6 +97,24 @@ class GobanBoard extends HTMLElement {
 
     this.innerHTML = board;
   }
+
+  parsePosition(positionRaw) {
+    const regexp = /^([BW]?)(\d+)-(\d+)(\[(.+)\])?$/i;
+    const positionMatch = positionRaw.match(regexp);
+
+    if (
+      !positionMatch ||
+      !(positionMatch[2] && positionMatch[3]) ||
+      !(positionMatch[1] || positionMatch[5])
+    ) return null;
+
+    return {
+      player: positionMatch[1] ? positionMatch[1].toUpperCase() : null,
+      x:      Number(positionMatch[2]),
+      y:      Number(positionMatch[3]),
+      mark:   positionMatch[5] ? positionMatch[5] : null
+    };
+  }
   
 }
 
