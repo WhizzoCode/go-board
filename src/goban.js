@@ -37,13 +37,10 @@ class GobanBoard extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case 'size':
-        const oldSize = this.size;
         this.size = Number(newValue) || 19;
-        if ((this.size !== oldSize) && this.isConnected) {
-          this.drawBoard();
-        }
         break;
     }
+    if (this.isConnected) this.drawBoard();
   }
 
   drawBoard() {
