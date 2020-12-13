@@ -89,15 +89,23 @@ class GobanBoard extends HTMLElement {
         <circle cx="${point[0]}" cy="${point[1]}" r="${this.config.board_star_radius}" fill="${this.config.board_marks_color}"></circle>
       `;
     });
+    this.positions.filter(position => {
+      if (position.player === null) return null;
+      if (position.x > this.size) return null;
+      if (position.y > this.size) return null;
+      return true;
+    }).forEach(position => {
+      let stoneColor = this.config.stone_black_color;
+      let stoneBorderColor = this.config.stone_black_border_color;
+      if (position.player === 'W') {
+        stoneColor = this.config.stone_white_color;
+        stoneBorderColor = this.config.stone_white_border_color;
+      }
+      board += `
+        <circle cx="${position.x}" cy="${position.y}" r="${this.config.stone_radius}" fill="${stoneColor}" stroke="${stoneBorderColor}" stroke-width="${this.config.stone_border_width}"></circle>  
+      `;
+    });
     board += `
-        <!-- Testing stones -->
-        <circle cx="17" cy="4" r="${this.config.stone_radius}" fill="${this.config.stone_black_color}" stroke="${this.config.stone_black_border_color}" stroke-width="${this.config.stone_border_width}"></circle>
-        <circle cx="4" cy="15" r="${this.config.stone_radius}" fill="${this.config.stone_black_color}" stroke="${this.config.stone_black_border_color}" stroke-width="${this.config.stone_border_width}"></circle>
-        <circle cx="16" cy="17" r="${this.config.stone_radius}" fill="${this.config.stone_black_color}" stroke="${this.config.stone_black_border_color}" stroke-width="${this.config.stone_border_width}"></circle>
-        <circle cx="4" cy="3" r="${this.config.stone_radius}" fill="${this.config.stone_white_color}" stroke="${this.config.stone_white_border_color}" stroke-width="${this.config.stone_border_width}"></circle>
-        <circle cx="3" cy="13" r="${this.config.stone_radius}" fill="${this.config.stone_white_color}" stroke="${this.config.stone_white_border_color}" stroke-width="${this.config.stone_border_width}"></circle>
-        <circle cx="4" cy="17" r="${this.config.stone_radius}" fill="${this.config.stone_white_color}" stroke="${this.config.stone_white_border_color}" stroke-width="${this.config.stone_border_width}"></circle>
-        <!-- Testing stones -->
       </svg>
     `;
 
