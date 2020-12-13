@@ -72,7 +72,7 @@ class GobanBoard extends HTMLElement {
     const board_width = 2 * this.config.board_border_width + this.size - 1;
     const grid_start = 1 - (this.config.board_grid_width / 2);
     const grid_end = this.size + (this.config.board_grid_width / 2);
-    this.config.stone_radius -= this.config.stone_border_width / 2;
+    const stone_radius = this.config.stone_radius - (this.config.stone_border_width / 2);
 
     let board = `
       <style>
@@ -117,7 +117,7 @@ class GobanBoard extends HTMLElement {
         stoneBorderColor = this.config.stone_white_border_color;
       }
       board += `
-        <circle cx="${position.x}" cy="${position.y}" r="${this.config.stone_radius}" fill="${stoneColor}" stroke="${stoneBorderColor}" stroke-width="${this.config.stone_border_width}"></circle>  
+        <circle cx="${position.x}" cy="${position.y}" r="${stone_radius}" fill="${stoneColor}" stroke="${stoneBorderColor}" stroke-width="${this.config.stone_border_width}"></circle>  
       `;
     });
     board += `
