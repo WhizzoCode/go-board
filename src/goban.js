@@ -42,11 +42,26 @@ class GobanBoard extends HTMLElement {
         break;
       case 'positions':
         this.positions = [];
-        const positionsRaw = newValue.trim().split(/\s+/);
-        positionsRaw.forEach((positionRaw) => {
-          const position = this.parsePosition(positionRaw);
-          if (position) this.positions.push(position);
-        });
+        if (newValue) {
+          const positionsRaw = newValue.trim().split(/\s+/);
+          positionsRaw.forEach((positionRaw) => {
+            const position = this.parsePosition(positionRaw);
+            if (position) {
+              const duplicatePosition = this.positions.filter(currentPosition => {
+                if (
+                  currentPosition.x === position.x &&
+                  currentPosition.y === position.y
+                ) return true;
+                return false;
+              })[0];
+              if (duplicatePosition) {
+                const duplicatePositionIndex = this.positions.indexOf(duplicatePosition);
+                this.positions.splice(duplicatePositionIndex, 1);
+              }
+              this.positions.push(position);
+            }
+          });
+        }
         break;
     }
     if (this.isConnected) this.drawBoard();
