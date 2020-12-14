@@ -1,4 +1,4 @@
-class GobanBoard extends HTMLElement {
+class GoBoard extends HTMLElement {
 
   isConnected = false;
   size = 19;
@@ -76,7 +76,7 @@ class GobanBoard extends HTMLElement {
 
     let board = `
       <style>
-        goban-board {display: inline-block;}
+        go-board {display: inline-block;}
       </style>
       <svg xmlns="http://www.w3.org/2000/svg" viewbox="${board_start} ${board_start} ${board_width} ${board_width}">
         <rect x="${board_start}" y="${board_start}" width="${board_width}" height="${board_width}" fill="${this.config.board_color}"></rect>
@@ -147,4 +147,4 @@ class GobanBoard extends HTMLElement {
   
 }
 
-customElements.define('goban-board', GobanBoard);
+customElements.define('go-board', GoBoard);
