@@ -77,6 +77,7 @@ class GoBoard extends HTMLElement {
     let board = `
       <style>
         go-board {display: inline-block;}
+        svg {display: block;}
       </style>
       <svg xmlns="http://www.w3.org/2000/svg" viewbox="${board_start} ${board_start} ${board_width} ${board_width}">
         <rect x="${board_start}" y="${board_start}" width="${board_width}" height="${board_width}" fill="${this.config.board_color}"></rect>
