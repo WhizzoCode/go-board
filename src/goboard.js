@@ -4,9 +4,10 @@ class GoBoard extends HTMLElement {
   size = 19;
   positions = [];
   config = {
-    board_border_width: 0.75,
+    board_padding: 0.75,
     board_color: '#e3b85e',
-    // board_color: '#fff',
+    board_border_color: '#000',
+    board_border_width: 0.05,
     board_grid_width: 0.05,
     board_star_radius: 0.1,
     board_marks_color: '#000',
@@ -68,8 +69,8 @@ class GoBoard extends HTMLElement {
   }
 
   drawBoard() {
-    const board_start = 1 - this.config.board_border_width;
-    const board_width = 2 * this.config.board_border_width + this.size - 1;
+    const board_start = 1 - this.config.board_padding;
+    const board_width = 2 * this.config.board_padding + this.size - 1;
     const grid_start = 1 - (this.config.board_grid_width / 2);
     const grid_end = this.size + (this.config.board_grid_width / 2);
     const stone_radius = this.config.stone_radius - (this.config.stone_border_width / 2);
@@ -80,7 +81,7 @@ class GoBoard extends HTMLElement {
         svg {display: block;}
       </style>
       <svg xmlns="http://www.w3.org/2000/svg" viewbox="${board_start} ${board_start} ${board_width} ${board_width}">
-        <rect x="${board_start}" y="${board_start}" width="${board_width}" height="${board_width}" fill="${this.config.board_color}"></rect>
+        <rect x="${board_start}" y="${board_start}" width="${board_width}" height="${board_width}" fill="${this.config.board_color}" stroke="${this.config.board_border_color}" stroke-width="${this.config.board_border_width}"></rect>
         <path stroke-width="${this.config.board_grid_width}" stroke="${this.config.board_marks_color}" d="
     `;
     for (let i = 1; i <= this.size; i++) {
