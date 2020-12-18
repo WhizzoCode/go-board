@@ -4,7 +4,7 @@
 
 A web component to create Go boards with positioned stones.
 
-<img src="sample-board.svg" style="display: block; width: 100px; margin-left: auto; margin-right: auto" />
+<img src="sample-board.svg" width="400px" style="display: block; margin-left: auto; margin-right: auto" />
 
 ```html
 <go-board
