@@ -1,10 +1,10 @@
-<script src="src/goboard.js"></script>
-
 # Go board
 
 A web component to create Go boards with positioned stones.
 
-<img src="sample-board.svg" width="400px" style="display: block; margin-left: auto; margin-right: auto" />
+<p align="center">
+  <img src="sample-board.svg" width="400px" />
+</p>
 
 ```html
 <go-board
