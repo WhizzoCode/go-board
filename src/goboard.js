@@ -5,18 +5,18 @@ class GoBoard extends HTMLElement {
   positions = [];
   config = {
     board_padding: 0.75,
+    board_border_width: 0.025,
+    board_grid_width: 0.025,
+    board_star_radius: 0.075,
+    stone_radius: 0.5,
+    stone_border_width: 0.025,
     board_color: '#e3b85e',
     board_border_color: '#000',
-    board_border_width: 0.05,
-    board_grid_width: 0.05,
-    board_star_radius: 0.1,
     board_marks_color: '#000',
-    stone_radius: 0.5,
-    stone_border_width: 0.05,
-    stone_black_border_color: '#000',
     stone_black_color: '#000',
-    stone_white_border_color: '#000',
-    stone_white_color: '#fff'
+    stone_white_color: '#fff',
+    stone_black_border_color: '#000',
+    stone_white_border_color: '#000'
   };
 
   constructor() {
