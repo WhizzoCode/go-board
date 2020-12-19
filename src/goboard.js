@@ -25,7 +25,7 @@ class GoBoard extends HTMLElement {
 
   connectedCallback() {
     this.isConnected = true;
-    this.drawBoard();
+    this.draw();
   }
 
   disconnectedCallback() {
@@ -65,10 +65,10 @@ class GoBoard extends HTMLElement {
         }
         break;
     }
-    if (this.isConnected) this.drawBoard();
+    if (this.isConnected) this.draw();
   }
 
-  drawBoard() {
+  draw() {
     const board_start = 1 - this.config.board_padding;
     const board_width = 2 * this.config.board_padding + this.size - 1;
     const grid_start = 1 - (this.config.board_grid_width / 2);
