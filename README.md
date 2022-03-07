@@ -3,7 +3,7 @@
 A web component to create Go boards with positioned stones.
 
 <p align="center">
-  <img src="sample-board.svg" width="400px" />
+  <img src="samples/sample-board.svg" width="400px" />
 </p>
 
 ```html
