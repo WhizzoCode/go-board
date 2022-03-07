@@ -4,7 +4,7 @@
   "description": "A web component to create Go boards with positioned stones and marks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "web-dev-server --node-resolve --watch --open"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/WhizzoCode/go-board/issues"
   },
-  "homepage": "https://github.com/WhizzoCode/go-board#readme"
+  "homepage": "https://github.com/WhizzoCode/go-board#readme",
+  "devDependencies": {
+    "@web/dev-server": "^0.1.30"
+  }
 }
