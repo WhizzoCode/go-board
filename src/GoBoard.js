@@ -1,4 +1,4 @@
-class GoBoard extends HTMLElement {
+export default class GoBoard extends HTMLElement {
 
   isConnected = false;
   size = 19;
@@ -148,5 +148,3 @@ class GoBoard extends HTMLElement {
   }
   
 }
-
-customElements.define('go-board', GoBoard);
