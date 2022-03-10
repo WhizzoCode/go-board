@@ -19,10 +19,160 @@
 
   <h1>go-board sample</h1>
 
-  <go-board
+  <h2>Work in progress</h2>
+
+  <go-board></go-board>
+
+  <!-- <h3>New</h3> -->
+
+  <!-- <go-board size="9" coords nostars fromcol="1" tocol="9" fromrow="1" torow="9">
+    <go-stone col="1" row="2" color="black"></go-stone>
+    <go-stone col="1" row="3" color="white"></go-stone>
+    <go-stone col="2" row="2" color="black"></go-stone>
+    <go-stone col="2" row="3" color="white"></go-stone>
+
+    <go-mark type="text"   col="2" row="2" label="1"></go-mark>
+    <go-mark type="square" col="2" row="3"          ></go-mark>
+    <go-mark type="arrow"  fromcol="5" fromrow="6" tocol="2" torow="3"></go-mark>
+  </go-board> -->
+
+  <!-- <h3>Old</h3> -->
+
+  <!-- <go-board
     size="19"
-    positions="B17-3 W3-4 B4-16 W16-17 B10-10 W16-4 B17-4 W16-5 B15-2 W17-14 B10-16 W12-17 B4-10 W5-4"
-  ></go-board>
+    positions="W19-14 B15-1 B17-3 W3-4 B4-16 W16-17 B10-10 W16-4 B17-4 W16-5 B15-2 W17-14 B10-16 W12-17 B4-10 W5-4"
+  ></go-board> -->
+
+  <!-- <go-board
+    size="13"
+    positions="W7-3 W8-1 B1-10 W3-4 B10-10 B4-10 W5-4"
+  ></go-board> -->
+
+  <!-- <go-board
+    size="9"
+    positions="W1-4 W3-4 W5-4 B7-7 B9-4 B7-5"
+  ></go-board> -->
+
+  <h2>SVG</h2>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.25 0.25 19.5 19.5">
+    <rect x="0.25" y="0.25" width="19.5" height="19.5" fill="#e3b85e" stroke="#000" stroke-width="0.025"></rect>
+    <path stroke-width="0.025" stroke="#000" d="
+      M 0.9875  1 H 19.0125 M 0.9875  2 H 19.0125 M 0.9875  3 H 19.0125
+      M 0.9875  4 H 19.0125 M 0.9875  5 H 19.0125 M 0.9875  6 H 19.0125
+      M 0.9875  7 H 19.0125 M 0.9875  8 H 19.0125 M 0.9875  9 H 19.0125
+      M 0.9875 10 H 19.0125 M 0.9875 11 H 19.0125 M 0.9875 12 H 19.0125
+      M 0.9875 13 H 19.0125 M 0.9875 14 H 19.0125 M 0.9875 15 H 19.0125
+      M 0.9875 16 H 19.0125 M 0.9875 17 H 19.0125 M 0.9875 18 H 19.0125
+      M 0.9875 19 H 19.0125
+
+      M  1 0.9875 V 19.0125 M  2 0.9875 V 19.0125 M  3 0.9875 V 19.0125
+      M  4 0.9875 V 19.0125 M  5 0.9875 V 19.0125 M  6 0.9875 V 19.0125
+      M  7 0.9875 V 19.0125 M  8 0.9875 V 19.0125 M  9 0.9875 V 19.0125
+      M 10 0.9875 V 19.0125 M 11 0.9875 V 19.0125 M 12 0.9875 V 19.0125
+      M 13 0.9875 V 19.0125 M 14 0.9875 V 19.0125 M 15 0.9875 V 19.0125
+      M 16 0.9875 V 19.0125 M 17 0.9875 V 19.0125 M 18 0.9875 V 19.0125
+      M 19 0.9875 V 19.0125
+    "></path>
+    <circle cx="4" cy="4" r="0.075" fill="#000"></circle>
+    <circle cx="10" cy="4" r="0.075" fill="#000"></circle>
+    <circle cx="16" cy="4" r="0.075" fill="#000"></circle>
+    <circle cx="4" cy="10" r="0.075" fill="#000"></circle>
+    <circle cx="10" cy="10" r="0.075" fill="#000"></circle>
+    <circle cx="16" cy="10" r="0.075" fill="#000"></circle>
+    <circle cx="4" cy="16" r="0.075" fill="#000"></circle>
+    <circle cx="10" cy="16" r="0.075" fill="#000"></circle>
+    <circle cx="16" cy="16" r="0.075" fill="#000"></circle>
+    <circle cx="19" cy="14" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="15" cy="1" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="17" cy="3" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="3" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="4" cy="16" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="16" cy="17" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="10" cy="10" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="16" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="17" cy="4" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="16" cy="5" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="15" cy="2" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="17" cy="14" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="10" cy="16" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="12" cy="17" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="4" cy="10" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="5" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+  </svg>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.25 0.25 13.5 13.5">
+    <rect x="0.25" y="0.25" width="13.5" height="13.5" fill="#e3b85e" stroke="#000" stroke-width="0.025"></rect>
+    <path stroke-width="0.025" stroke="#000" d="
+      M 0.9875  1 H 13.0125 M 0.9875  2 H 13.0125 M 0.9875  3 H 13.0125
+      M 0.9875  4 H 13.0125 M 0.9875  5 H 13.0125 M 0.9875  6 H 13.0125
+      M 0.9875  7 H 13.0125 M 0.9875  8 H 13.0125 M 0.9875  9 H 13.0125
+      M 0.9875 10 H 13.0125 M 0.9875 11 H 13.0125 M 0.9875 12 H 13.0125
+      M 0.9875 13 H 13.0125
+
+      M  1 0.9875 V 13.0125 M  2 0.9875 V 13.0125 M  3 0.9875 V 13.0125
+      M  4 0.9875 V 13.0125 M  5 0.9875 V 13.0125 M  6 0.9875 V 13.0125
+      M  7 0.9875 V 13.0125 M  8 0.9875 V 13.0125 M  9 0.9875 V 13.0125
+      M 10 0.9875 V 13.0125 M 11 0.9875 V 13.0125 M 12 0.9875 V 13.0125
+      M 13 0.9875 V 13.0125
+    "></path>
+    <circle cx="4" cy="4" r="0.075" fill="#000"></circle>
+    <circle cx="10" cy="4" r="0.075" fill="#000"></circle>
+    <circle cx="7" cy="7" r="0.075" fill="#000"></circle>
+    <circle cx="4" cy="10" r="0.075" fill="#000"></circle>
+    <circle cx="10" cy="10" r="0.075" fill="#000"></circle>
+    <circle cx="7" cy="3" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="8" cy="1" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="1" cy="10" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="3" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="10" cy="10" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="4" cy="10" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="5" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+  </svg>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.25 0.25 9.5 9.5">
+    <rect x="0.25" y="0.25" width="9.5" height="9.5" fill="#e3b85e" stroke="#000" stroke-width="0.025"></rect>
+    <path stroke-width="0.025" stroke="#000" d="
+      M 0.9875 1 H 9.0125 M 0.9875 2 H 9.0125 M 0.9875 3 H 9.0125
+      M 0.9875 4 H 9.0125 M 0.9875 5 H 9.0125 M 0.9875 6 H 9.0125
+      M 0.9875 7 H 9.0125 M 0.9875 8 H 9.0125 M 0.9875 9 H 9.0125
+      
+      M 1 0.9875 V 9.0125 M 2 0.9875 V 9.0125 M 3 0.9875 V 9.0125
+      M 4 0.9875 V 9.0125 M 5 0.9875 V 9.0125 M 6 0.9875 V 9.0125
+      M 7 0.9875 V 9.0125 M 8 0.9875 V 9.0125 M 9 0.9875 V 9.0125
+    "></path>
+    <circle cx="3" cy="3" r="0.075" fill="#000"></circle>
+    <circle cx="7" cy="3" r="0.075" fill="#000"></circle>
+    <circle cx="5" cy="5" r="0.075" fill="#000"></circle>
+    <circle cx="3" cy="7" r="0.075" fill="#000"></circle>
+    <circle cx="7" cy="7" r="0.075" fill="#000"></circle>
+    <circle cx="1" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="3" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="5" cy="4" r="0.4875" fill="#fff" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="7" cy="7" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="9" cy="4" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+    <circle cx="7" cy="5" r="0.4875" fill="#000" stroke="#000" stroke-width="0.025"></circle>  
+  </svg>
+
+  <h2>Config</h2>
+
+  <pre><code>
+    config = {
+      - [x] board_padding: 0.75,
+      - [x] board_border_width: 0.025,
+      - [x] board_grid_width: 0.025,
+      - [ ] board_star_radius: 0.075,
+      - [ ] stone_radius: 0.5,
+      - [ ] stone_border_width: 0.025,
+      - [x] board_color: '#e3b85e',
+      - [x] board_border_color: '#000',
+      - [x] board_marks_color: '#000',
+      - [ ] stone_black_color: '#000',
+      - [ ] stone_white_color: '#fff',
+      - [ ] stone_black_border_color: '#000',
+      - [ ] stone_white_border_color: '#000'
+    };
+  </code></pre>
 
 </body>
 </html>

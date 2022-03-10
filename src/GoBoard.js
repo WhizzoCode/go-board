@@ -1,150 +1,120 @@
 export default class GoBoard extends HTMLElement {
 
-  isConnected = false;
-  size = 19;
-  positions = [];
-  config = {
-    board_padding: 0.75,
-    board_border_width: 0.025,
-    board_grid_width: 0.025,
-    board_star_radius: 0.075,
-    stone_radius: 0.5,
-    stone_border_width: 0.025,
-    board_color: '#e3b85e',
-    board_border_color: '#000',
-    board_marks_color: '#000',
-    stone_black_color: '#000',
-    stone_white_color: '#fff',
-    stone_black_border_color: '#000',
-    stone_white_border_color: '#000'
-  };
+  #defaultSize = 19;
+  #svg;
+  #board;
+  #marks;
 
   constructor() {
     super();
-  }
 
-  connectedCallback() {
-    this.isConnected = true;
-    this.draw();
-  }
-
-  disconnectedCallback() {
-    this.isConnected = false;
-  }
-
-  static get observedAttributes() {
-    return ['size', 'positions'];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    switch (name) {
-      case 'size':
-        this.size = Number(newValue) || 19;
-        break;
-      case 'positions':
-        this.positions = [];
-        if (newValue) {
-          const positionsRaw = newValue.trim().split(/\s+/);
-          positionsRaw.forEach((positionRaw) => {
-            const position = this.parsePosition(positionRaw);
-            if (position) {
-              const duplicatePosition = this.positions.filter(currentPosition => {
-                if (
-                  currentPosition.x === position.x &&
-                  currentPosition.y === position.y
-                ) return true;
-                return false;
-              })[0];
-              if (duplicatePosition) {
-                const duplicatePositionIndex = this.positions.indexOf(duplicatePosition);
-                this.positions.splice(duplicatePositionIndex, 1);
-              }
-              this.positions.push(position);
-            }
-          });
-        }
-        break;
-    }
-    if (this.isConnected) this.draw();
-  }
-
-  draw() {
-    const board_start = 1 - this.config.board_padding;
-    const board_width = 2 * this.config.board_padding + this.size - 1;
-    const grid_start = 1 - (this.config.board_grid_width / 2);
-    const grid_end = this.size + (this.config.board_grid_width / 2);
-    const stone_radius = this.config.stone_radius - (this.config.stone_border_width / 2);
-
-    let board = `
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = `
       <style>
-        go-board {display: inline-block;}
-        go-board svg {display: block;}
+        :host {
+          --board-color: #e3b85e;
+          --board-border-color: #000;
+          --board-marks-color: #000;
+          --board-padding: 0.75;
+          --board-border-width: 0.025;
+          --board-grid-width: 0.025;
+        }
+        rect {
+          fill: var(--board-color);
+          stroke: var(--board-border-color);
+          stroke-width: var(--board-border-width);
+        }
+        path {
+          stroke: var(--board-marks-color);
+          stroke-width: var(--board-grid-width);
+          stroke-linecap: square;
+        }
       </style>
-      <svg xmlns="http://www.w3.org/2000/svg" viewbox="${board_start} ${board_start} ${board_width} ${board_width}">
-        <rect x="${board_start}" y="${board_start}" width="${board_width}" height="${board_width}" fill="${this.config.board_color}" stroke="${this.config.board_border_color}" stroke-width="${this.config.board_border_width}"></rect>
-        <path stroke-width="${this.config.board_grid_width}" stroke="${this.config.board_marks_color}" d="
-    `;
-    for (let i = 1; i <= this.size; i++) {
-      board += `
-        M ${grid_start} ${i} H ${grid_end}
-        M ${i} ${grid_start} V ${grid_end}
-      `;
-    }
-    board += `
-        "></path>
-    `;
-    let stars = [];
-    if (this.size === 9) {
-      stars = [[3, 3], [7, 3], [5, 5], [3, 7], [7, 7]];
-    } else if (this.size === 13) {
-      stars = [[4, 4], [10, 4], [7, 7], [4, 10], [10, 10]];
-    } else if (this.size === 19) {
-      stars = [[4, 4], [10, 4], [16, 4], [4, 10], [10, 10], [16, 10], [4, 16], [10, 16], [16, 16]];
-    }
-    stars.forEach(point => {
-      board += `
-        <circle cx="${point[0]}" cy="${point[1]}" r="${this.config.board_star_radius}" fill="${this.config.board_marks_color}"></circle>
-      `;
-    });
-    this.positions.filter(position => {
-      if (position.player === null) return null;
-      if (position.x > this.size) return null;
-      if (position.y > this.size) return null;
-      return true;
-    }).forEach(position => {
-      let stoneColor = this.config.stone_black_color;
-      let stoneBorderColor = this.config.stone_black_border_color;
-      if (position.player === 'W') {
-        stoneColor = this.config.stone_white_color;
-        stoneBorderColor = this.config.stone_white_border_color;
-      }
-      board += `
-        <circle cx="${position.x}" cy="${position.y}" r="${stone_radius}" fill="${stoneColor}" stroke="${stoneBorderColor}" stroke-width="${this.config.stone_border_width}"></circle>  
-      `;
-    });
-    board += `
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <rect></rect>
+        <path></path>
       </svg>
     `;
 
-    this.innerHTML = board;
+    this.#svg  = this.shadowRoot.querySelector('svg');
+    this.#board = this.shadowRoot.querySelector('rect');
+    this.#marks = this.shadowRoot.querySelector('path');
+
+    this.#drawBoard();
   }
 
-  parsePosition(positionRaw) {
-    const regexp = /^([BW]?)(\d+)-(\d+)(\[(.+)\])?$/i;
-    const positionMatch = positionRaw.match(regexp);
-
-    if (
-      !positionMatch ||
-      !(positionMatch[2] && positionMatch[3]) ||
-      !(positionMatch[1] || positionMatch[5])
-    ) return null;
-
-    return {
-      player: positionMatch[1] ? positionMatch[1].toUpperCase() : null,
-      x:      Number(positionMatch[2]),
-      y:      Number(positionMatch[3]),
-      mark:   positionMatch[5] ? positionMatch[5] : null
-    };
+  get size() {
+    return Number(this.getAttribute('size')) || this.#defaultSize;
   }
-  
+
+  set size(value) {
+    this.setAttribute('size', value);
+  }
+
+  get #cssBoardPadding() {
+    return parseFloat(
+      getComputedStyle(this).getPropertyValue('--board-padding')
+    );
+  }
+
+  get #cssBoardBorderWidth() {
+    return parseFloat(
+      getComputedStyle(this).getPropertyValue('--board-border-width')
+    );
+  }
+
+  get #boardPos() {
+    return 1 - this.#cssBoardPadding;
+  }
+
+  get #boardWidth() {
+    return this.size - 1 + 2 * this.#cssBoardPadding;
+  }
+
+  get #totalBoardPos() {
+    return this.#boardPos - this.#cssBoardBorderWidth / 2;
+  }
+
+  get #totalBoardWidth() {
+    return this.#boardWidth + this.#cssBoardBorderWidth;
+  }
+
+  static observedAttributes = [ 'size' ];
+
+  attributeChangedCallback(attr, was, value) {
+    switch (attr) {
+      case 'size':
+        if (
+          (was === null && Number(value) === this.#defaultSize) ||
+          (Number(was) === this.#defaultSize && value === null)
+        ) {
+          return;
+        }
+        this.#drawBoard();
+        break;
+    }
+  }
+
+  #drawBoard() {
+    this.#board.setAttribute('x', this.#boardPos);
+    this.#board.setAttribute('y', this.#boardPos);
+    this.#board.setAttribute('width', this.#boardWidth);
+    this.#board.setAttribute('height', this.#boardWidth);
+
+    let pathData = '';
+    for (let i = 1; i <= this.size; i++) {
+      pathData += `M1 ${ i }H${ this.size }M${ i } 1V${ this.size }`;
+    }
+    this.#marks.setAttribute('d', pathData);
+
+    this.#updateViewBox();
+  }
+
+  #updateViewBox() {
+    this.#svg.setAttribute('viewBox', `
+      ${ this.#totalBoardPos   } ${ this.#totalBoardPos   }
+      ${ this.#totalBoardWidth } ${ this.#totalBoardWidth }
+    `);
+  }
+
 }
