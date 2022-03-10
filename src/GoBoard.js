@@ -4,6 +4,7 @@ export default class GoBoard extends HTMLElement {
   #svg;
   #board;
   #marks;
+  #stars;
 
   constructor() {
     super();
@@ -18,6 +19,7 @@ export default class GoBoard extends HTMLElement {
           --board-padding: 0.75;
           --board-border-width: 0.025;
           --board-grid-width: 0.025;
+          --board-star-radius: 0.075;
         }
         rect {
           fill: var(--board-color);
@@ -29,16 +31,22 @@ export default class GoBoard extends HTMLElement {
           stroke-width: var(--board-grid-width);
           stroke-linecap: square;
         }
+        #stars circle {
+          r: var(--board-star-radius);
+          fill: var(--board-marks-color);
+        }
       </style>
       <svg xmlns="http://www.w3.org/2000/svg">
         <rect></rect>
         <path></path>
+        <g id="stars"></g>
       </svg>
     `;
 
     this.#svg  = this.shadowRoot.querySelector('svg');
     this.#board = this.shadowRoot.querySelector('rect');
     this.#marks = this.shadowRoot.querySelector('path');
+    this.#stars = this.shadowRoot.querySelector('#stars');
 
     this.#drawBoard();
   }
@@ -49,6 +57,18 @@ export default class GoBoard extends HTMLElement {
 
   set size(value) {
     this.setAttribute('size', value);
+  }
+
+  get nostars() {
+    return this.hasAttribute('nostars') ? true : false;
+  }
+
+  set nostars(value) {
+    if (value) {
+      this.setAttribute('nostars', true);
+    } else {
+      this.removeAttribute('nostars');
+    }
   }
 
   get #cssBoardPadding() {
@@ -79,7 +99,7 @@ export default class GoBoard extends HTMLElement {
     return this.#boardWidth + this.#cssBoardBorderWidth;
   }
 
-  static observedAttributes = [ 'size' ];
+  static observedAttributes = [ 'size', 'nostars' ];
 
   attributeChangedCallback(attr, was, value) {
     switch (attr) {
@@ -92,6 +112,12 @@ export default class GoBoard extends HTMLElement {
         }
         this.#drawBoard();
         break;
+      case 'nostars':
+        if (this.nostars) {
+          this.#stars.style.visibility = 'hidden';
+        } else {
+          this.#stars.removeAttribute('style');
+        }
     }
   }
 
@@ -106,6 +132,19 @@ export default class GoBoard extends HTMLElement {
       pathData += `M1 ${ i }H${ this.size }M${ i } 1V${ this.size }`;
     }
     this.#marks.setAttribute('d', pathData);
+
+    const points = {
+      9: [[3, 3], [7, 3], [5, 5], [3, 7], [7, 7]],
+      13: [[4, 4], [10, 4], [7, 7], [4, 10], [10, 10]],
+      19: [
+        [4, 4], [10, 4], [16, 4], [4, 10], [10, 10],
+        [16, 10], [4, 16], [10, 16], [16, 16]
+      ]
+    };
+    this.#stars.innerHTML = '';
+    points[this.size]?.forEach(point => {
+      this.#stars.innerHTML += `<circle cx="${ point[0] }" cy="${ point[1] }"></circle>`;
+    });
 
     this.#updateViewBox();
   }
