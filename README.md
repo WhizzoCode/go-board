@@ -53,6 +53,26 @@ The positions are added to this attribute separated by spaces, each position con
 
 ## TO DO
 
-- [ ] marks in positions (with and without stones)
-- [ ] coordinate guides at board margins
-- [ ] crop boards
+- [ ] Refactor
+
+### go-board attributes:
+
+- [ ] size
+- [ ] coords
+- [ ] nostars
+- [ ] fromcol
+- [ ] tocol
+- [ ] fromrow
+- [ ] torow
+
+### go-position attributes:
+
+- [ ] col
+- [ ] row
+- [ ] stone
+- [ ] mark:
+  - [ ] !cross ✕
+  - [ ] !circle ○
+  - [ ] !square □
+  - [ ] !triangle △
+  - [ ] text
